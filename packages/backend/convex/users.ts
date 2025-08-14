@@ -9,13 +9,18 @@ export const getMany = query({
 });
 
 export const addUser = mutation({
-        args: { name: v.string() },
+        args: {},
         handler: async (ctx, args) => {
-                const identity = ctx.auth.getUserIdentity();
+                const identity = await ctx.auth.getUserIdentity();
                 if (identity === null) {
                         throw new Error('Unauthorized');
                 }
-                const user = { name: args.name };
-                return await ctx.db.insert('users', user);
+                const orgId = identity.orgId as string;
+
+                if (!orgId) {
+                        throw new Error('Organization ID is required');
+                }
+
+                return await ctx.db.insert('users', { name: 'Test' });
         },
 });
