@@ -1,12 +1,19 @@
-import { Button } from "@workspace/ui/components/button";
+'use client';
+import { useVapi } from '@/modules/hooks/use-vapi';
+import { Button } from '@workspace/ui/components/button';
 
 export default function Page() {
-  return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Hello apps/widget</h1>
-        <Button size="sm">Button</Button>
-      </div>
-    </div>
-  );
+        const { isSpeaking, isConnecting, isConnected, transcript, startCall, endCall } = useVapi();
+        return (
+                <div className="flex flex-col gap-4 items-center justify-center min-h-svh max-w-md mx-auto w-full">
+                        <Button onClick={() => startCall()}>Start Call</Button>
+                        <Button onClick={() => endCall()} variant={'destructive'}>
+                                End Call
+                        </Button>
+                        <p>IsConnected: {isConnected}</p>
+                        <p>IsConnecting: {isConnecting}</p>
+
+                        <p>{JSON.stringify(transcript)}</p>
+                </div>
+        );
 }
