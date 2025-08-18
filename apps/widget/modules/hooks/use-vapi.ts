@@ -15,7 +15,7 @@ export const useVapi = () => {
 
         useEffect(() => {
                 // Only for testing purposes, users / customers will replace with their own actual API token
-                const vapiInstance = new Vapi('13287e62-56f6-4497-8810-efb26c373a83');
+                const vapiInstance = new Vapi('');
                 setVapi(vapiInstance);
 
                 vapiInstance.on('call-start', () => {
@@ -65,7 +65,7 @@ export const useVapi = () => {
 
                 // Only for testing purposes, users / customers will replace with their own Assistant ID
                 if (vapi) {
-                        vapi.start('9c805a51-0104-4d63-8ac1-607bef9a2681');
+                        vapi.start('');
                 }
         };
 

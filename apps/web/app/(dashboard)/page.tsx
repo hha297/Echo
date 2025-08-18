@@ -10,7 +10,7 @@ export default function Page() {
         const users = useQuery(api.users.getMany);
         const addUser = useMutation(api.users.addUser);
         return (
-                <div className="flex flex-col items-center justify-center min-h-svg gap-4">
+                <div className="flex flex-col items-center justify-center min-h-svh gap-4">
                         <UserButton />
 
                         <OrganizationSwitcher hidePersonal={true} />

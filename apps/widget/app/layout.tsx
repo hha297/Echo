@@ -1,16 +1,18 @@
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Space_Grotesk, Space_Mono } from 'next/font/google';
 
 import '@workspace/ui/globals.css';
 import { Providers } from '@/components/providers';
 
-const fontSans = Geist({
+const fontPrimary = Space_Grotesk({
         subsets: ['latin'],
-        variable: '--font-sans',
+        weight: ['300', '400', '500', '600', '700'],
+        variable: '--font-primary',
 });
 
-const fontMono = Geist_Mono({
+const fontSecondary = Space_Mono({
         subsets: ['latin'],
-        variable: '--font-mono',
+        weight: ['400', '700'],
+        variable: '--font-secondary',
 });
 
 export default function RootLayout({
@@ -20,7 +22,7 @@ export default function RootLayout({
 }>) {
         return (
                 <html lang="en" suppressHydrationWarning>
-                        <body className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}>
+                        <body className={`${fontPrimary.variable} ${fontSecondary.variable} font-primary antialiased`}>
                                 <Providers>{children}</Providers>
                         </body>
                 </html>

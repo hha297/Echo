@@ -18,6 +18,7 @@ import {
 import { CreditCardIcon, InboxIcon, LayoutDashboardIcon, LibraryBigIcon, MicIcon, PaletteIcon } from 'lucide-react';
 import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
+import { cn } from '@workspace/ui/lib/utils';
 
 const customerSupportItems = [
         {
@@ -106,6 +107,10 @@ export const DashboardSidebar = () => {
                                                                                 asChild
                                                                                 tooltip={item.title}
                                                                                 isActive={isActive(item.url)}
+                                                                                className={cn(
+                                                                                        isActive(item.url) &&
+                                                                                                'bg-gradient-to-b from-sidebar-primary to-[#0b63f3]! text-sidebar-primary-foreground! hover:to-[#0b63f3]/90!',
+                                                                                )}
                                                                         >
                                                                                 <Link href={item.url}>
                                                                                         <item.icon className="h-5 w-5" />
@@ -129,6 +134,10 @@ export const DashboardSidebar = () => {
                                                                                 asChild
                                                                                 tooltip={item.title}
                                                                                 isActive={isActive(item.url)}
+                                                                                className={cn(
+                                                                                        isActive(item.url) &&
+                                                                                                'bg-gradient-to-b from-sidebar-primary to-[#0b63f3]! text-sidebar-primary-foreground! hover:to-[#0b63f3]/90!',
+                                                                                )}
                                                                         >
                                                                                 <Link href={item.url}>
                                                                                         <item.icon className="h-5 w-5" />
@@ -151,6 +160,10 @@ export const DashboardSidebar = () => {
                                                                                 asChild
                                                                                 tooltip={item.title}
                                                                                 isActive={isActive(item.url)}
+                                                                                className={cn(
+                                                                                        isActive(item.url) &&
+                                                                                                'bg-gradient-to-b from-sidebar-primary to-[#0b63f3]! text-sidebar-primary-foreground! hover:to-[#0b63f3]/90!',
+                                                                                )}
                                                                         >
                                                                                 <Link href={item.url}>
                                                                                         <item.icon className="h-5 w-5" />
