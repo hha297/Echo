@@ -15,3 +15,4 @@ export const contactSessionIdAtomFamily = atomFamily((organizationId: string) =>
 
 export const errorMessageAtom = atom<string | null>(null);
 export const loadingMessageAtom = atom<string | null>(null);
+export const conversationIdAtom = atom<Id<'conversation'> | null>(null);
