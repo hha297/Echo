@@ -4,7 +4,11 @@
                 "baseUrl": ".",
                 "paths": {
                         "@workspace/backend/*": ["./convex/*"]
-                }
+                },
+                "module": "esnext",
+                "moduleResolution": "bundler",
+                "target": "esnext",
+                "moduleDetection": "force"
         },
         "include": ["."],
         "exclude": ["node_modules"]
