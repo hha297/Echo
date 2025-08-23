@@ -17,7 +17,7 @@ import {
 import { AIResponse } from '@workspace/ui/components/ai/response';
 
 import { AIMessage, AIMessageContent } from '@workspace/ui/components/ai/message';
-
+import { DicebearAvatar } from '@workspace/ui/components/dicebear-avatar';
 import {
         AIInput,
         AIInputSubmit,
@@ -25,6 +25,8 @@ import {
         AIInputToolbar,
         AIInputTools,
 } from '@workspace/ui/components/ai/input';
+import { InfiniteScrollTrigger } from '@workspace/ui/components/infinite-scroll-trigger';
+import { useInfiniteScroll } from '@workspace/ui/hooks/use-infinite-scroll';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import z from 'zod';
@@ -61,6 +63,12 @@ export const WidgetChatScreen = () => {
                         : 'skip',
                 { initialNumItems: 10 },
         );
+
+        const { topElementRef, handleLoadMore, canLoadMore, isLoadingMore } = useInfiniteScroll({
+                status: messages.status,
+                loadMore: messages.loadMore,
+                loadSize: 10,
+        });
 
         const form = useForm<z.infer<typeof formSchema>>({
                 resolver: zodResolver(formSchema),
@@ -111,6 +119,12 @@ export const WidgetChatScreen = () => {
 
                         <AIConversation>
                                 <AIConversationContent>
+                                        <InfiniteScrollTrigger
+                                                canLoadMore={canLoadMore}
+                                                isLoadingMore={isLoadingMore}
+                                                onLoadMore={handleLoadMore}
+                                                ref={topElementRef}
+                                        />
                                         {toUIMessages(messages.results ?? [])?.map((message) => {
                                                 return (
                                                         <AIMessage
@@ -120,7 +134,13 @@ export const WidgetChatScreen = () => {
                                                                 <AIMessageContent>
                                                                         <AIResponse>{message.content}</AIResponse>
                                                                 </AIMessageContent>
-                                                                {/* TODO: Add Avatar */}
+                                                                {message.role === 'assistant' && (
+                                                                        <DicebearAvatar
+                                                                                imageUrl="/logo.svg"
+                                                                                seed="assistant"
+                                                                                size={32}
+                                                                        />
+                                                                )}
                                                         </AIMessage>
                                                 );
                                         })}
