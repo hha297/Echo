@@ -61,13 +61,14 @@ export const WidgetChatScreen = () => {
                                   contactSessionId,
                           }
                         : 'skip',
-                { initialNumItems: 10 },
+                { initialNumItems: 5 },
         );
 
         const { topElementRef, handleLoadMore, canLoadMore, isLoadingMore } = useInfiniteScroll({
                 status: messages.status,
                 loadMore: messages.loadMore,
-                loadSize: 10,
+                loadSize: 5,
+                observerEnabled: false,
         });
 
         const form = useForm<z.infer<typeof formSchema>>({
