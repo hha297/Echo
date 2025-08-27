@@ -1,10 +1,57 @@
 import { ConvexError, v } from 'convex/values';
-import { query } from '../_generated/server.js';
+import { mutation, query } from '../_generated/server.js';
 import { supportAgent } from '../system/ai/agents/supportAgent.js';
 import { MessageDoc } from '@convex-dev/agent';
 
 import { paginationOptsValidator, PaginationResult } from 'convex/server';
 import { Doc } from '../_generated/dataModel.js';
+
+export const updateStatus = mutation({
+        args: {
+                conversationId: v.id('conversation'),
+
+                status: v.union(v.literal('unresolved'), v.literal('escalated'), v.literal('resolved')),
+        },
+        handler: async (ctx, args) => {
+                const identity = await ctx.auth.getUserIdentity();
+
+                if (identity === null) {
+                        throw new ConvexError({
+                                code: 'UNAUTHORIZED',
+                                message: 'Identity Not Found',
+                        });
+                }
+
+                const orgId = identity.orgId as string;
+
+                if (!orgId) {
+                        throw new ConvexError({
+                                code: 'UNAUTHORIZED',
+                                message: 'Organization Not Found',
+                        });
+                }
+
+                const conversation = await ctx.db.get(args.conversationId);
+
+                if (!conversation) {
+                        throw new ConvexError({
+                                code: 'NOT_FOUND',
+                                message: 'Conversation Not Found',
+                        });
+                }
+
+                if (conversation.organizationId !== orgId) {
+                        throw new ConvexError({
+                                code: 'UNAUTHORIZED',
+                                message: 'Invalid Organization ID',
+                        });
+                }
+
+                await ctx.db.patch(args.conversationId, {
+                        status: args.status,
+                });
+        },
+});
 
 export const getOne = query({
         args: {
@@ -15,7 +62,7 @@ export const getOne = query({
 
                 if (identity === null) {
                         throw new ConvexError({
-                                code: 'Unauthorized',
+                                code: 'UNAUTHORIZED',
                                 message: 'Identity Not Found',
                         });
                 }
@@ -24,7 +71,7 @@ export const getOne = query({
 
                 if (!orgId) {
                         throw new ConvexError({
-                                code: 'Unauthorized',
+                                code: 'UNAUTHORIZED',
                                 message: 'Organization Not Found',
                         });
                 }

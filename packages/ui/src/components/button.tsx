@@ -18,6 +18,8 @@ const buttonVariants = cva(
                                 link: 'text-primary underline-offset-4 hover:underline',
                                 transparent:
                                         'bg-transparent text-primary-foreground hover:bg-white hover:text-primary rounded-full',
+                                tertiary: 'bg-gradient-to-b from-[#3Fb62F] to-[#318D25] text-white hover:from-[#3Fb62F]/90 hover:to-[#318D25]/90 hover:text-white',
+                                warning: 'bg-gradient-to-b from-[#FF9900] to-[#FF6600] text-white hover:from-[#FF9900]/90 hover:to-[#FF6600]/90 hover:text-white',
                         },
                         size: {
                                 default: 'h-9 px-4 py-2 has-[>svg]:px-3',

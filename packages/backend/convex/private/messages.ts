@@ -4,6 +4,47 @@ import { components, internal } from '../_generated/api';
 import { supportAgent } from '../system/ai/agents/supportAgent';
 import { paginationOptsValidator } from 'convex/server';
 import { saveMessage } from '@convex-dev/agent';
+import { generateText } from 'ai';
+import { openai } from '@ai-sdk/openai';
+
+export const enhanceResponse = action({
+        args: {
+                prompt: v.string(),
+        },
+        handler: async (ctx, args) => {
+                const identity = await ctx.auth.getUserIdentity();
+
+                if (identity === null) {
+                        throw new ConvexError({
+                                code: 'UNAUTHORIZED',
+                                message: 'Identity Not Found',
+                        });
+                }
+                const orgId = identity.orgId as string;
+                if (!orgId) {
+                        throw new ConvexError({
+                                code: 'UNAUTHORIZED',
+                                message: 'Organization Not Found',
+                        });
+                }
+
+                const response = await generateText({
+                        model: openai('gpt-4o-mini'),
+                        messages: [
+                                {
+                                        role: 'system',
+                                        content: "Enhance the operator's message to be more professional, clear, helpful, concise and friendly while maintaining their intent, tone, and key information",
+                                },
+                                {
+                                        role: 'user',
+                                        content: args.prompt,
+                                },
+                        ],
+                });
+
+                return response.text;
+        },
+});
 
 export const create = mutation({
         args: {
@@ -15,7 +56,7 @@ export const create = mutation({
 
                 if (identity === null) {
                         throw new ConvexError({
-                                code: 'Unauthorized',
+                                code: 'UNAUTHORIZED',
                                 message: 'Identity Not Found',
                         });
                 }
@@ -24,7 +65,7 @@ export const create = mutation({
 
                 if (!orgId) {
                         throw new ConvexError({
-                                code: 'Unauthorized',
+                                code: 'UNAUTHORIZED',
                                 message: 'Organization Not Found',
                         });
                 }
