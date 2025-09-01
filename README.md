@@ -50,15 +50,13 @@ echo/
 │
 ├── apps/                     # Applications
 │   ├── web/                  # Main Next.js app (Operator Dashboard, SaaS frontend)
-│   ├── widget/               # Embeddable customer support widget
-│   └── docs/                 # Documentation site (optional)
+│   └── widget/               # Embeddable customer support widget
 │
 ├── packages/                 # Shared packages
 │   ├── backend/              # Convex backend functions & APIs
 │   ├── ui/                   # Shared shadcn/ui components
 │   ├── config/               # ESLint, Tailwind, TS configs
-│   ├── utils/                # Shared utility functions
-│   └── api/                  # SDK / API bindings
+│   └── utils/                # Shared utility functions
 │
 ├── turbo.json                # Turborepo pipeline config
 ├── pnpm-workspace.yaml       # pnpm workspace setup
