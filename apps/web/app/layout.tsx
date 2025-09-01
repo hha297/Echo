@@ -4,7 +4,7 @@ import '@workspace/ui/globals.css';
 
 import { ClerkProvider } from '@clerk/nextjs';
 import ConvexClientProvider from '@/components/providers';
-
+import { Toaster } from '@workspace/ui/components/sonner';
 const fontPrimary = Space_Grotesk({
         subsets: ['latin'],
         weight: ['300', '400', '500', '600', '700'],
@@ -26,7 +26,10 @@ export default function RootLayout({
                 <html lang="en" suppressHydrationWarning>
                         <body className={`${fontPrimary.variable} ${fontSecondary.variable} font-primary antialiased`}>
                                 <ClerkProvider>
-                                        <ConvexClientProvider>{children}</ConvexClientProvider>
+                                        <ConvexClientProvider>
+                                                <Toaster />
+                                                {children}
+                                        </ConvexClientProvider>
                                 </ClerkProvider>
                         </body>
                 </html>
