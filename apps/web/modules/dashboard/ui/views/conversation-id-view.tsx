@@ -147,7 +147,7 @@ export const ConversationIdView = ({ conversationId }: { conversationId: Id<'con
                                                         key={message.id}
                                                 >
                                                         <AIMessageContent>
-                                                                <AIResponse>{message.content}</AIResponse>
+                                                                <AIResponse>{(message as any).content}</AIResponse>
                                                         </AIMessageContent>
                                                         {message.role === 'user' && (
                                                                 <DicebearAvatar
