@@ -109,6 +109,10 @@ export const create = mutation({
                                 message: 'Invalid Session',
                         });
                 }
+                const widgetSettings = await ctx.db
+                        .query('widgetSettings')
+                        .withIndex('by_organization_id', (q) => q.eq('organizationId', args.organizationId))
+                        .unique();
 
                 const { threadId } = await supportAgent.createThread(ctx, { userId: args.organizationId });
 
@@ -116,8 +120,8 @@ export const create = mutation({
                         threadId: threadId,
                         message: {
                                 role: 'assistant',
-                                // TODO: Modify to change with settings
-                                content: 'Hello, how can I help you today?.',
+
+                                content: widgetSettings?.greetMessage || 'Hello, how can I help you today?.',
                         },
                 });
                 const conversationId = await ctx.db.insert('conversation', {
