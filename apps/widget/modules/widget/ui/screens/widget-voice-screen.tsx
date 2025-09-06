@@ -32,7 +32,7 @@ export const WidgetVoiceScreen = () => {
                                 </div>
                         </WidgetHeader>
                         {transcript.length > 0 ? (
-                                <AIConversation className="h-full flex-1 overflow-y-auto">
+                                <AIConversation className="h-full overflow-y-auto">
                                         <AIConversationContent>
                                                 {transcript.map((message, index) => (
                                                         <AIMessage
