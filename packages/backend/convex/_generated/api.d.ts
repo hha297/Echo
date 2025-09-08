@@ -8,8 +8,10 @@
  * @module
  */
 
+import type * as http from "../http.js";
 import type * as lib_extractTextContent from "../lib/extractTextContent.js";
 import type * as lib_secrets from "../lib/secrets.js";
+import type * as private_contactSessions from "../private/contactSessions.js";
 import type * as private_conversation from "../private/conversation.js";
 import type * as private_files from "../private/files.js";
 import type * as private_messages from "../private/messages.js";
@@ -33,6 +35,7 @@ import type * as system_contactSession from "../system/contactSession.js";
 import type * as system_conversation from "../system/conversation.js";
 import type * as system_plugins from "../system/plugins.js";
 import type * as system_secrets from "../system/secrets.js";
+import type * as system_subscription from "../system/subscription.js";
 import type * as users from "../users.js";
 
 import type {
@@ -50,8 +53,10 @@ import type {
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  http: typeof http;
   "lib/extractTextContent": typeof lib_extractTextContent;
   "lib/secrets": typeof lib_secrets;
+  "private/contactSessions": typeof private_contactSessions;
   "private/conversation": typeof private_conversation;
   "private/files": typeof private_files;
   "private/messages": typeof private_messages;
@@ -75,6 +80,7 @@ declare const fullApi: ApiFromModules<{
   "system/conversation": typeof system_conversation;
   "system/plugins": typeof system_plugins;
   "system/secrets": typeof system_secrets;
+  "system/subscription": typeof system_subscription;
   users: typeof users;
 }>;
 declare const fullApiWithMounts: typeof fullApi;

@@ -25,7 +25,13 @@ export default function RootLayout({
         return (
                 <html lang="en" suppressHydrationWarning>
                         <body className={`${fontPrimary.variable} ${fontSecondary.variable} font-primary antialiased`}>
-                                <ClerkProvider>
+                                <ClerkProvider
+                                        appearance={{
+                                                variables: {
+                                                        colorPrimary: '#3C82F6',
+                                                },
+                                        }}
+                                >
                                         <ConvexClientProvider>
                                                 <Toaster />
                                                 {children}
