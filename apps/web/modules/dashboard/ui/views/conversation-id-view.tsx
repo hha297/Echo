@@ -31,6 +31,7 @@ import { ConversationStatusButton } from '../components/conversation-status-butt
 import { useState } from 'react';
 import { Skeleton } from '@workspace/ui/components/skeleton';
 import { cn } from '@workspace/ui/lib/utils';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
         message: z.string().min(1, 'Message is required'),
@@ -69,6 +70,7 @@ export const ConversationIdView = ({ conversationId }: { conversationId: Id<'con
                         form.setValue('message', response);
                 } catch (error) {
                         console.error(error);
+                        toast.error('Failed to enhance message');
                 } finally {
                         setIsEnhancing(false);
                 }
