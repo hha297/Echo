@@ -1,5 +1,4 @@
 'use client';
-import { useThreadMessages, toUIMessages } from '@convex-dev/agent/react';
 
 import { Button } from '@workspace/ui/components/button';
 import { WidgetHeader } from '../components/widget-header';
@@ -33,7 +32,7 @@ import {
 } from '@workspace/ui/components/ai/input';
 import { InfiniteScrollTrigger } from '@workspace/ui/components/infinite-scroll-trigger';
 import { useInfiniteScroll } from '@workspace/ui/hooks/use-infinite-scroll';
-
+import { useThreadMessages, toUIMessages } from '@convex-dev/agent/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import z from 'zod';
 import { useForm } from 'react-hook-form';
@@ -153,7 +152,9 @@ export const WidgetChatScreen = () => {
                                                                 from={message.role === 'user' ? 'user' : 'assistant'}
                                                         >
                                                                 <AIMessageContent>
-                                                                        <AIResponse>{message.content}</AIResponse>
+                                                                        <AIResponse>
+                                                                                {(message as any).content}
+                                                                        </AIResponse>
                                                                 </AIMessageContent>
                                                                 {message.role === 'assistant' && (
                                                                         <DicebearAvatar

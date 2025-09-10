@@ -28,6 +28,15 @@ export const enhanceResponse = action({
                                 message: 'Organization Not Found',
                         });
                 }
+                const subscription = await ctx.runQuery(internal.system.subscription.getByOrganizationId, {
+                        organizationId: orgId,
+                });
+                if (subscription?.status !== 'active') {
+                        throw new ConvexError({
+                                code: 'BAD_REQUEST',
+                                message: 'Subscription not active',
+                        });
+                }
 
                 const response = await generateText({
                         model: openai('gpt-4o-mini'),

@@ -12,6 +12,7 @@ import {
 import { extractTextContent } from '../lib/extractTextContent';
 import { rag } from '../system/ai/rag';
 import { Id } from '../_generated/dataModel';
+import { internal } from '../_generated/api';
 
 function guessMimeType(fileName: string, bytes: ArrayBuffer): string {
         return guessMimeTypeFromExtension(fileName) || guessMimeTypeFromContents(bytes) || 'application/octet-stream';
@@ -40,6 +41,16 @@ export const addFile = action({
                         throw new ConvexError({
                                 code: 'UNAUTHORIZED',
                                 message: 'Organization Not Found',
+                        });
+                }
+
+                const subscription = await ctx.runQuery(internal.system.subscription.getByOrganizationId, {
+                        organizationId: orgId,
+                });
+                if (subscription?.status !== 'active') {
+                        throw new ConvexError({
+                                code: 'BAD_REQUEST',
+                                message: 'Subscription not active',
                         });
                 }
 
@@ -102,8 +113,6 @@ export const deleteFile = mutation({
                                 message: 'Organization Not Found',
                         });
                 }
-
-                const { entryId } = args;
 
                 const namespace = await rag.getNamespace(ctx, { namespace: orgId });
 
