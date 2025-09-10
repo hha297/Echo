@@ -72,7 +72,7 @@ const IntegrationsView = () => {
                                                                 className="flex-1 bg-background text-sm"
                                                                 value={organization?.id || ''}
                                                         />
-                                                        <Button variant="outline" size="sm" onClick={handleCopy}>
+                                                        <Button size="sm" onClick={handleCopy}>
                                                                 {isCopied ? (
                                                                         <CheckIcon className="size-4" />
                                                                 ) : (
