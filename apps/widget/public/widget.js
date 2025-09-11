@@ -1,7 +1,7 @@
 (function () {
         'use strict';
-        const o = { WIDGET_URL: 'http://localhost:3001', DEFAULT_POSITION: 'bottom-right' },
-                p = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        const o = { WIDGET_URL: 'https://echo-widget-sable.vercel.app', DEFAULT_POSITION: 'bottom-right' },
+                u = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
 </svg>`,
                 b = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -36,7 +36,7 @@
                 function g() {
                         ((e = document.createElement('button')),
                                 (e.id = 'echo-widget-button'),
-                                (e.innerHTML = p),
+                                (e.innerHTML = u),
                                 (e.style.cssText = `
       position: fixed;
       ${a === 'bottom-right' ? 'right: 20px;' : 'left: 20px;'}
@@ -103,7 +103,7 @@
                         const { type: s, payload: l } = i.data;
                         switch (s) {
                                 case 'close':
-                                        u();
+                                        p();
                                         break;
                                 case 'resize':
                                         l.height && t && (t.style.height = `${l.height}px`);
@@ -111,7 +111,7 @@
                         }
                 }
                 function y() {
-                        d ? u() : m();
+                        d ? p() : m();
                 }
                 function m() {
                         t &&
@@ -123,7 +123,7 @@
                                 }, 10),
                                 (e.innerHTML = b));
                 }
-                function u() {
+                function p() {
                         t &&
                                 e &&
                                 ((d = !1),
@@ -132,7 +132,7 @@
                                 setTimeout(() => {
                                         t && (t.style.display = 'none');
                                 }, 300),
-                                (e.innerHTML = p),
+                                (e.innerHTML = u),
                                 (e.style.background = '#3b82f6'));
                 }
                 function x() {
@@ -144,6 +144,6 @@
                 function v(i) {
                         (x(), i.organizationId && (r = i.organizationId), i.position && (a = i.position), h());
                 }
-                ((window.EchoWidget = { init: v, show: m, hide: u, destroy: x }), h());
+                ((window.EchoWidget = { init: v, show: m, hide: p, destroy: x }), h());
         })();
 })();
